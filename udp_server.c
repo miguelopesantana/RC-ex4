@@ -4,6 +4,7 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 #define BUFLEN 512	// Tamanho do buffer
 #define PORT 9876	// Porto para recepção das mensagens
@@ -53,13 +54,20 @@ int main(void) {
                                           {"peruca"},
                                           {"baguete"} };
 
+    bool flag = false;
     for(int i = 0; i < len(lista); i++){
 		if(strcmp(buffer, lista[i]) == 0){
-			printf("A palavra inserida é reservada!");
-		}else{
-			printf("A palavra inserida não é reservada!");
+			flag = true;
+			break;
+		}else if(strcmp(buffer, lista[i]) != 0) {
+			flag = false;
 		}
-
+	}
+	if(flag == true){
+		printf("A palavra inserida é reservada!");
+	}else{
+		printf("A palavra inserida não é reservada!");
+	}
 	// Fecha socket e termina programa
 	close(sckt);
 	return 0;
