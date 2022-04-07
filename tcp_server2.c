@@ -55,10 +55,20 @@ int main(){
     
     while(1){
         while(waitpid(-1, NULL, WNOHANG)>0);
+        int connected = 0;
+        while(connected!=1){
+            //aceitar a ligação do jogador 1
+            if((client_1 = accept(socket_1, (struct sockaddr *)&client1_addr,(socklen_t *)&client1_addr_size)) < 0){
+                erro("Erro a conectar o jogador 1");
+            //aceitar a ligação do jogador 1
+            }else if((client_2 = accept(socket_2, (struct sockaddr *)&client2_addr,(socklen_t *)&client2_addr_size)) < 0){
+                erro("Erro a conectar o jogador 1");
+            }else{
+                connected = 1;
+            }
 
-        client_1 = accept(socket_1, (struct sockaddr *)&client1_addr,(socklen_t *)&client1_addr_size);
-        client_2 = accept(socket_2, (struct sockaddr *)&client2_addr,(socklen_t *)&client2_addr_size);
-        
+        }
+
         if(client_1 > 0){
             if(fork() == 0){
                 close(socket_1);
