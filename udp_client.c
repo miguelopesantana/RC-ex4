@@ -45,7 +45,7 @@ int main(int argc, char *argv[]){
         erro("Erro no sendto");
     }
 
-    if(( recv_len = recvfrom(sckt, buffer, BUF_SIZE, 0, (struct sockaddr *)&addr, (socklen_t *)&scktlen)) == -1){
+    if((recv_len = recvfrom(sckt, buffer, BUF_SIZE, 0, (struct sockaddr *)&addr, (socklen_t *)&scktlen)) == -1){
         erro("Erro o recvfrom");
     }
 

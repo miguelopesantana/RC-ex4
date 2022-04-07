@@ -28,7 +28,7 @@ int main() {
   addr.sin_family = AF_INET;
   addr.sin_addr.s_addr = htonl(INADDR_ANY);
   addr.sin_port = htons(SERVER_PORT);
-
+//file descriptor
   if ( (fd = socket(AF_INET, SOCK_STREAM, 0)) < 0)
 	erro("na funcao socket");
   if ( bind(fd,(struct sockaddr*)&addr,sizeof(addr)) < 0)
