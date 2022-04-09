@@ -8,6 +8,8 @@
 
 #define BUFLEN 512	// Tamanho do buffer
 #define PORT 9876	// Porto para recepção das mensagens
+#define NUM_STRINGS 5
+#define MAX_LENGTH 200
 
 void erro(char *s) {
 	perror(s);
