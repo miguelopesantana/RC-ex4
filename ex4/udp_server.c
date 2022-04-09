@@ -4,6 +4,7 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <unistd.h>
+#include <stdbool.h>
 
 #define BUFLEN 512	// Tamanho do buffer
 #define PORT 9876	// Porto para recepção das mensagens
@@ -42,10 +43,33 @@ int main(void) {
 	// Para ignorar o restante conteúdo (anterior do buffer)
 	buffer[recv_len]='\0';
 
+	printf("Servidor à espera de palavras.\n");
 	printf("Recebi uma mensagem do sistema com o endereço %s e o porto %d\n", inet_ntoa(si_outra.sin_addr), ntohs(si_outra.sin_port));
-	printf("Conteúdo da mensagem: %s\n", buffer);
+	printf("Conteúdo da mensagem recebida: %s\n", buffer);
 
-	// Fecha socket e termina programa
-	close(sckt);
-	return 0;
+	char lista[NUM_STRINGS][MAX_LENGTH] = { {"bola"},
+                                          {"sofa"},
+                                          {"urso"},
+                                          {"peruca"},
+                                          {"baguete"} };
+
+    bool flag = false;
+    for(int i = 0; i < NUM_STRINGS; i++){
+		if(strcmp(buffer, lista[i]) == 0){
+			flag = true;
+			break;
+		}else if(strcmp(buffer, lista[i]) != 0) {
+			flag = false;
+		}
+	}
+	if(flag == true){
+		printf("A palavra inserida é reservada!\n");
+	}else{
+		printf("A palavra inserida não é reservada!\n");
+	}
+	
+	if(strcmp(buffer, "adeus")){
+		close(sckt);
+		return 0;
+	}
 }

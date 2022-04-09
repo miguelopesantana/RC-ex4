@@ -55,6 +55,7 @@ int main(int argc, char *argv[]){
     	close(sckt);
     	exit(0);
     }
+}
 
 void erro(char *msg){
     printf("Erro: %s\n", msg);
