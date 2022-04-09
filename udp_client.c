@@ -50,9 +50,11 @@ int main(int argc, char *argv[]){
     }
 
     printf("%s", buffer);
-    close(sckt);
-    exit(0);
-}
+    if(strcmp(buffer, "adeus")){
+    
+    	close(sckt);
+    	exit(0);
+    }
 
 void erro(char *msg){
     printf("Erro: %s\n", msg);

@@ -44,7 +44,7 @@ int main(void) {
 	}
 	// Para ignorar o restante conteúdo (anterior do buffer)
 	buffer[recv_len]='\0';
-
+    printf("Servidor à espera de palavras.\n");
 	printf("Recebi uma mensagem do sistema com o endereço %s e o porto %d\n", inet_ntoa(si_outra.sin_addr), ntohs(si_outra.sin_port));
 	printf("Conteúdo da mensagem recebida: %s\n", buffer);
 
@@ -64,11 +64,13 @@ int main(void) {
 		}
 	}
 	if(flag == true){
-		printf("A palavra inserida é reservada!");
-	}else{
-		printf("A palavra inserida não é reservada!");
+		printf("A palavra inserida é reservada!\n");
+	}else if(flag == false){
+		printf("A palavra inserida não é reservada!\n");
 	}
 	// Fecha socket e termina programa
-	close(sckt);
-	return 0;
+	if(strcmp(buffer, "adeus")){
+		close(sckt);
+		return 0;
+	}
 }
